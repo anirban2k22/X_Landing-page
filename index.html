@@ -1,0 +1,1125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Xcelerator — What if education actually prepared you for life?</title>
+<meta name="description" content="Xcelerator is building a future where learning isn't about marks, lectures or memorizing. It's about building, exploring, creating, failing and growing.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Poppins:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   XCELERATOR — LANDING PAGE
+   Design tokens. Change these to re-skin the whole site.
+   ============================================================ */
+:root{
+  --ink:#16161A;            /* headings */
+  --ink-soft:#4B4B57;       /* body copy */
+  --ink-mute:#8A8A96;       /* captions */
+  --cream:#F8F6F1;          /* page background */
+  --cream-2:#FBFAF6;        /* alternating band */
+  --paper:#FFFFFF;          /* cards */
+  --lime:#C8F45C;           /* primary accent / buttons */
+  --lime-deep:#B4E63F;
+  --lime-soft:#E9F7C6;      /* pastel card */
+  --violet:#6D4AFF;         /* links, script accents */
+  --violet-soft:#DDD4FB;    /* pastel card */
+  --violet-tint:#F0EBFE;    /* bands */
+  --butter:#FCEBC0;
+  --sky:#D9E8FA;
+  --peach:#FBDFCC;
+  --rose:#FBD9DE;
+  --line:#E7E4DC;
+  --radius-s:10px;
+  --radius:16px;
+  --radius-l:24px;
+  --shadow-s:0 1px 2px rgba(22,22,26,.05), 0 6px 18px rgba(22,22,26,.05);
+  --shadow-m:0 2px 4px rgba(22,22,26,.05), 0 14px 40px rgba(22,22,26,.08);
+  --maxw:1180px;
+  --pad:clamp(18px,4vw,44px);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  margin:0;background:var(--cream);color:var(--ink);
+  font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;
+}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+h1,h2,h3,h4{font-family:'Poppins',sans-serif;color:var(--ink);margin:0;line-height:1.12;letter-spacing:-.02em;font-weight:600}
+h1{font-size:clamp(34px,5.2vw,60px);font-weight:700}
+h2{font-size:clamp(26px,3.6vw,42px);font-weight:600}
+h3{font-size:clamp(18px,1.7vw,22px)}
+p{margin:0}
+.wrap{max-width:var(--maxw);margin:0 auto;padding-left:var(--pad);padding-right:var(--pad)}
+.sect{padding:clamp(56px,7vw,96px) 0}
+.sect--tight{padding:clamp(40px,5vw,64px) 0}
+.band-cream2{background:var(--cream-2)}
+.band-violet{background:var(--violet-tint)}
+.band-white{background:var(--paper)}
+
+/* ---------- signature: hand-drawn marker treatments ---------- */
+.script{font-family:'Caveat',cursive;font-weight:700;letter-spacing:0}
+.mark{position:relative;display:inline-block;z-index:0}
+.mark>svg{position:absolute;left:-2%;top:0;width:104%;height:100%;z-index:-1;pointer-events:none;overflow:visible}
+/* highlighter swipe: a filled marker band that wipes in from the left */
+.mark--hl>svg{top:-3%;height:102%;transform:scaleX(0);transform-origin:left center;
+  transition:transform .8s cubic-bezier(.62,0,.28,1)}
+.mark--hl.is-in>svg{transform:scaleX(1)}
+.mark--hl path{fill:var(--lime);stroke:none}
+.mark--butter path{fill:var(--butter)}
+/* pen strokes: underlines + hand-drawn circles that draw themselves */
+.mark--stroke>svg{top:4%;height:104%}
+.mark--stroke path{fill:none;stroke-linecap:round;stroke-linejoin:round;vector-effect:non-scaling-stroke;
+  transition:stroke-dashoffset .9s cubic-bezier(.45,0,.25,1)}
+.mark--stroke.is-in path{stroke-dashoffset:0 !important}
+.mark--stroke.m-violet path{stroke:var(--violet);stroke-width:3.5}
+.mark--stroke.m-lime path{stroke:var(--lime-deep);stroke-width:4.5}
+.mark--circle>svg{left:-9%;width:118%;top:-24%;height:150%}
+.spark{display:inline-block;width:.6em;height:.6em;color:var(--lime-deep);vertical-align:super;stroke-width:2}
+
+/* ---------- buttons ---------- */
+.btn{display:inline-flex;align-items:center;gap:10px;padding:13px 22px;border-radius:999px;
+  font-family:'Poppins',sans-serif;font-weight:600;font-size:15px;line-height:1;
+  transition:transform .18s ease, box-shadow .18s ease, background .18s ease}
+.btn svg{width:17px;height:17px}
+.btn--lime{background:var(--lime);color:var(--ink);box-shadow:var(--shadow-s)}
+.btn--lime:hover{background:var(--lime-deep);transform:translateY(-2px);box-shadow:var(--shadow-m)}
+.btn--dark{background:var(--ink);color:#fff}
+.btn--dark:hover{transform:translateY(-2px)}
+.btn--ghost{border:1.5px solid var(--violet-soft);background:var(--violet-tint);color:var(--ink)}
+.btn--ghost:hover{background:#fff;transform:translateY(-2px)}
+.btn:hover svg.arrow{transform:translateX(3px)}
+.btn svg.arrow{transition:transform .18s ease}
+.playbtn{display:inline-flex;align-items:center;gap:12px;font-weight:600;font-family:'Poppins',sans-serif;font-size:15px}
+.playbtn i,.playbtn .ring{display:grid;place-items:center;width:42px;height:42px;border-radius:50%;
+  border:1.8px solid var(--ink);transition:background .2s,color .2s}
+.playbtn:hover .ring{background:var(--ink);color:#fff}
+.iconbtn{display:grid;place-items:center;width:38px;height:38px;border-radius:50%;background:#fff;
+  border:1px solid var(--line);box-shadow:var(--shadow-s);transition:transform .18s,background .18s}
+.iconbtn:hover{transform:translateY(-2px);background:var(--lime)}
+.iconbtn svg{width:16px;height:16px}
+
+/* ---------- reveal on scroll ---------- */
+.rv{opacity:0;transform:translateY(18px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.7,.3,1)}
+.rv.is-in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){
+  .rv{opacity:1;transform:none;transition:none}
+  .mark--hl>svg{transform:none}
+  .mark--stroke path{stroke-dashoffset:0 !important;transition:none}
+  *{animation:none !important}
+  html{scroll-behavior:auto}
+}
+
+/* ---------- nav ---------- */
+.nav{position:sticky;top:0;z-index:60;background:rgba(248,246,241,.86);backdrop-filter:blur(10px);
+  border-bottom:1px solid transparent;transition:border-color .2s, background .2s}
+.nav.is-stuck{border-bottom-color:var(--line)}
+.nav__in{display:flex;align-items:center;justify-content:space-between;gap:16px;height:68px;
+  max-width:var(--maxw);margin:0 auto;padding:0 var(--pad)}
+.brand{display:flex;align-items:center;gap:9px}
+.brand img{width:26px;height:26px;object-fit:contain}
+.brand span{font-family:'Poppins',sans-serif;font-weight:600;font-size:19px;letter-spacing:-.02em}
+.nav__links{display:flex;align-items:center;gap:26px}
+.nav__link{font-family:'Poppins',sans-serif;font-weight:500;font-size:15px;color:var(--ink-soft);position:relative;padding:6px 0}
+.nav__link:hover{color:var(--ink)}
+.nav__link::after{content:"";position:absolute;left:0;right:100%;bottom:0;height:2px;background:var(--lime-deep);
+  transition:right .25s ease}
+.nav__link:hover::after{right:0}
+
+/* ---------- hero ---------- */
+.hero{display:grid;grid-template-columns:1.02fr .98fr;align-items:stretch;background:var(--cream);
+  border-bottom:1px solid var(--line)}
+.hero__copy{display:flex;flex-direction:column;justify-content:center;
+  padding:clamp(38px,5.5vw,76px) clamp(24px,3vw,48px) clamp(46px,6vw,84px)
+          max(var(--pad),calc((100vw - var(--maxw))/2 + var(--pad)))}
+.hero h1{max-width:12ch}
+.hero__sub{margin-top:22px;font-size:clamp(15px,1.25vw,17px);color:var(--ink-soft);max-width:44ch}
+.hero__sub b{color:var(--ink);font-weight:600}
+.hero__cta{display:flex;align-items:center;gap:22px;margin-top:32px;flex-wrap:wrap}
+.hero__art{position:relative;overflow:hidden;min-height:clamp(320px,42vw,540px)}
+.hero__art svg{position:absolute;inset:0;width:100%;height:100%}
+.hero__art::before{content:"";position:absolute;inset:0;z-index:2;pointer-events:none;
+  background:linear-gradient(90deg,var(--cream) 0%,rgba(248,246,241,.62) 9%,rgba(248,246,241,0) 30%)}
+
+/* ---------- "let's be honest" ---------- */
+.honest{display:grid;grid-template-columns:.85fr 1.15fr;gap:clamp(24px,5vw,64px);align-items:center}
+.honest__lines{font-size:15.5px;color:var(--ink-soft);margin-top:26px;display:grid;gap:2px}
+.honest__lines b{color:var(--ink);font-weight:600}
+.honest__punch{margin-top:22px;font-family:'Poppins',sans-serif;font-weight:600;font-size:19px;line-height:1.5}
+.honest__punch .v{color:var(--violet)}
+.compare{display:grid;grid-template-columns:1fr auto 1fr;gap:clamp(12px,2.4vw,28px);align-items:center}
+.compare__col{display:flex;flex-direction:column;align-items:center;gap:22px}
+.pill{display:inline-flex;align-items:center;gap:8px;padding:7px 16px;border-radius:999px;
+  font-family:'Poppins',sans-serif;font-weight:600;font-size:14px}
+.pill--old{background:var(--rose)}
+.pill--new{background:var(--lime)}
+.pill svg{width:15px;height:15px}
+.flow{display:flex;align-items:flex-start;justify-content:center;gap:clamp(2px,.8vw,10px);flex-wrap:nowrap}
+.flow__step{display:flex;flex-direction:column;align-items:center;gap:9px;width:clamp(56px,6vw,76px);text-align:center}
+.flow__step svg{width:clamp(28px,3vw,38px);height:clamp(28px,3vw,38px);stroke-width:1.4;color:var(--ink)}
+.flow__step span{font-size:11.5px;color:var(--ink-soft);font-weight:500;line-height:1.25}
+.flow__arrow{color:var(--ink-mute);margin-top:clamp(10px,1.4vw,16px)}
+.flow__arrow svg{width:16px;height:16px}
+.vs{display:grid;place-items:center;width:56px;height:56px;border-radius:50%;border:1.5px solid var(--lime-deep);
+  font-family:'Poppins',sans-serif;font-weight:600;font-size:14px;color:var(--ink-soft);background:#fff}
+.compare__rule{position:relative}
+
+/* ---------- pastel card grids ---------- */
+.lead{text-align:center;font-family:'Poppins',sans-serif;font-weight:600;font-size:clamp(17px,2vw,22px)}
+.lead .v{color:var(--violet)}
+.lead .link{color:var(--violet);text-decoration:underline;text-underline-offset:3px}
+.cards3{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(14px,2vw,26px);margin-top:34px}
+.card{border-radius:var(--radius-l);padding:clamp(22px,2.6vw,32px);text-align:center;
+  transition:transform .25s cubic-bezier(.2,.7,.3,1),box-shadow .25s}
+.card:hover{transform:translateY(-5px);box-shadow:var(--shadow-m)}
+.card svg{width:44px;height:44px;stroke-width:1.35;margin:0 auto 16px;color:var(--ink)}
+.card h3{margin-bottom:8px}
+.card p{font-size:14.5px;color:var(--ink-soft)}
+.card u{text-decoration-thickness:1.5px;text-underline-offset:3px}
+.c--lime{background:var(--lime-soft)}
+.c--violet{background:var(--violet-soft)}
+.c--butter{background:var(--butter)}
+.c--sky{background:var(--sky)}
+.c--peach{background:var(--peach)}
+.closing{text-align:center;margin-top:30px;font-size:15.5px;color:var(--ink-soft)}
+.closing b{color:var(--ink);font-weight:600}
+.closing .v{color:var(--violet);font-weight:600}
+
+/* ---------- journey (imagine if) ---------- */
+.journey{display:grid;grid-template-columns:repeat(6,1fr);gap:10px;margin-top:44px;position:relative}
+.jstep{position:relative;text-align:center;padding-top:64px}
+.jstep__dot{position:absolute;top:0;left:50%;transform:translateX(-50%);width:52px;height:52px;border-radius:50%;
+  background:#fff;border:1.5px solid var(--line);display:grid;place-items:center;z-index:2;transition:.25s}
+.jstep:hover .jstep__dot{background:var(--lime);border-color:var(--lime);transform:translateX(-50%) translateY(-4px)}
+.jstep__dot svg{width:22px;height:22px;stroke-width:1.5}
+.jstep::before{content:"";position:absolute;top:26px;left:-50%;width:100%;height:2px;
+  background:repeating-linear-gradient(90deg,var(--line) 0 7px,transparent 7px 14px)}
+.jstep:first-child::before{display:none}
+.jstep h4{font-family:'Poppins',sans-serif;font-size:14.5px;font-weight:600}
+.jstep p{font-size:12.5px;color:var(--ink-soft);margin-top:4px}
+
+/* ---------- wide cards (how we make learning exciting) ---------- */
+.cardsWide{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(14px,2vw,24px);margin-top:36px}
+.wcard{display:flex;gap:18px;align-items:flex-start;border-radius:var(--radius-l);padding:clamp(20px,2.4vw,28px);
+  transition:transform .25s cubic-bezier(.2,.7,.3,1),box-shadow .25s}
+.wcard:hover{transform:translateY(-5px);box-shadow:var(--shadow-m)}
+.wcard>svg{width:46px;height:46px;flex:0 0 auto;stroke-width:1.3}
+.wcard h3{font-size:18px;margin-bottom:6px}
+.wcard p{font-size:14px;color:var(--ink-soft)}
+.wcard .yes,.wcard .no{display:inline-flex;align-items:center;gap:6px}
+.wcard .yes svg,.wcard .no svg{width:14px;height:14px}
+.wcard .yes svg{color:#3E9B4F}.wcard .no svg{color:#E2574C}
+
+/* ---------- more than a company / videos ---------- */
+.mtc{display:grid;grid-template-columns:.72fr 2fr;gap:clamp(22px,3vw,44px);align-items:center}
+.mtc p{font-size:14.5px;color:var(--ink-soft);margin-top:16px}
+.mtc p b{color:var(--ink);font-weight:600}
+.videos{display:grid;grid-template-columns:repeat(5,1fr);gap:clamp(10px,1.3vw,16px)}
+.vcard{position:relative;border-radius:var(--radius);overflow:hidden;aspect-ratio:.72;background:#222;
+  display:block;transition:transform .25s cubic-bezier(.2,.7,.3,1),box-shadow .25s}
+.vcard:hover{transform:translateY(-5px);box-shadow:var(--shadow-m)}
+.vcard img{width:100%;height:100%;object-fit:cover}
+.vcard::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,10,14,.12) 30%,rgba(10,10,14,.72) 100%)}
+.vcard__play{position:absolute;top:42%;left:50%;transform:translate(-50%,-50%);z-index:3;width:44px;height:44px;
+  border-radius:50%;background:rgba(255,255,255,.92);display:grid;place-items:center;transition:transform .25s}
+.vcard:hover .vcard__play{transform:translate(-50%,-50%) scale(1.09)}
+.vcard__play svg{width:18px;height:18px;fill:var(--ink);color:var(--ink)}
+.vcard__q{position:absolute;left:14px;right:14px;bottom:14px;z-index:3;color:#fff;font-size:13.5px;
+  font-weight:500;line-height:1.35}
+.vcard__q em{font-style:normal;background:var(--lime);color:var(--ink);padding:1px 4px;border-radius:3px;
+  box-decoration-break:clone;-webkit-box-decoration-break:clone}
+.vcard--cta{background:var(--violet-tint);border:1.5px solid var(--violet-soft);display:flex;flex-direction:column;
+  align-items:center;justify-content:center;text-align:center;gap:10px;padding:14px}
+.vcard--cta::after{display:none}
+.vcard--cta>svg{width:clamp(30px,3vw,40px);height:clamp(30px,3vw,40px);color:var(--violet);stroke-width:1.4}
+.vcard--cta span{font-family:'Poppins',sans-serif;font-weight:600;font-size:clamp(13px,1.25vw,15px);line-height:1.3;
+  background:linear-gradient(transparent 62%,var(--lime) 62%)}
+.vcard--cta small{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:5px;
+  font-size:11px;line-height:1.3;color:var(--ink-soft)}
+.vcard--cta small svg{width:14px;height:14px;color:#E2574C}
+
+/* ---------- proof / stats ---------- */
+.proof{display:grid;grid-template-columns:.7fr 2fr;gap:clamp(20px,3vw,48px);align-items:center}
+.stats{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
+.stat{text-align:center}
+.stat>svg{width:34px;height:34px;stroke-width:1.4;color:var(--violet);margin:0 auto 12px}
+.stat__n{font-family:'Poppins',sans-serif;font-weight:700;font-size:clamp(20px,2.3vw,28px);line-height:1;
+  display:inline-block;background:linear-gradient(transparent 55%,var(--lime) 55%);padding:0 4px}
+.stat__l{font-size:13.5px;color:var(--ink-soft);margin-top:8px}
+
+/* ---------- stories ---------- */
+.stories{display:grid;grid-template-columns:.7fr 2fr;gap:clamp(20px,3vw,48px);align-items:center;
+  border-top:1px solid var(--line);padding-top:clamp(28px,4vw,48px);margin-top:clamp(28px,4vw,48px)}
+.qgrid{display:grid;grid-template-columns:repeat(3,1fr) auto;gap:clamp(12px,1.6vw,20px);align-items:center}
+.qcard{display:flex;gap:14px;background:#fff;border:1px solid var(--line);border-radius:var(--radius);
+  padding:14px;transition:transform .25s,box-shadow .25s}
+.qcard:hover{transform:translateY(-4px);box-shadow:var(--shadow-m)}
+.qcard img{width:74px;height:88px;object-fit:cover;border-radius:10px;flex:0 0 auto}
+.qcard p{font-size:13.5px;color:var(--ink-soft);line-height:1.45}
+.qcard cite{display:block;margin-top:10px;font-style:normal;font-size:12.5px}
+.qcard cite b{display:block;font-family:'Poppins',sans-serif;font-weight:600;font-size:13px}
+.heart{color:var(--violet);width:26px;height:26px;margin-top:14px}
+
+/* ---------- community ---------- */
+.community{display:grid;grid-template-columns:.72fr 2.2fr;gap:clamp(20px,3vw,40px);align-items:center}
+.community p{font-size:14.5px;color:var(--ink-soft);margin-top:16px}
+.roles{display:grid;grid-template-columns:repeat(5,1fr);gap:clamp(10px,1.3vw,16px)}
+.role{position:relative;border-radius:var(--radius);padding:18px;min-height:190px;display:flex;flex-direction:column;
+  transition:transform .25s cubic-bezier(.2,.7,.3,1),box-shadow .25s}
+.role:hover{transform:translateY(-5px);box-shadow:var(--shadow-m)}
+.role>svg:first-child{width:24px;height:24px;stroke-width:1.4;margin-bottom:14px}
+.role h4{font-family:'Poppins',sans-serif;font-size:14.5px;font-weight:600;display:flex;gap:7px;align-items:flex-start}
+.role h4 svg{width:16px;height:16px;flex:0 0 auto;margin-top:2px}
+.role p{font-size:12.5px;color:var(--ink-soft);margin-top:8px;margin-bottom:auto}
+.role .iconbtn{align-self:flex-end;margin-top:14px}
+
+/* ---------- closing banner ---------- */
+.banner{position:relative;overflow:hidden;color:#fff;isolation:isolate}
+.banner svg.bg{position:absolute;inset:0;width:100%;height:100%;z-index:-2}
+.banner::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,rgba(255,255,255,.9) 0%,rgba(255,255,255,.66) 38%,rgba(255,255,255,.12) 66%,rgba(0,0,0,.18) 100%)}
+.banner__in{display:grid;grid-template-columns:1fr .9fr 1fr;gap:clamp(18px,3vw,40px);align-items:center;
+  padding:clamp(46px,6vw,86px) 0}
+.banner h2{color:var(--ink)}
+.banner h2 .v{color:var(--violet)}
+.banner__list{color:var(--ink);font-size:15.5px;line-height:1.85;font-weight:500}
+.banner__cta{text-align:right}
+.banner__cta .script{display:block;font-size:clamp(26px,3vw,38px);color:var(--lime);line-height:1;
+  text-shadow:0 1px 10px rgba(0,0,0,.25)}
+.banner__cta strong{display:block;font-family:'Poppins',sans-serif;font-size:clamp(22px,2.6vw,32px);
+  font-weight:600;color:#fff;margin:2px 0 18px;text-shadow:0 1px 12px rgba(0,0,0,.3)}
+
+/* ---------- footer ---------- */
+.foot{background:var(--ink);color:#fff}
+.foot__in{display:flex;align-items:center;justify-content:space-between;gap:22px;flex-wrap:wrap;
+  padding:26px var(--pad);max-width:var(--maxw);margin:0 auto}
+.foot .brand span{color:#fff}
+.foot__tag{font-size:14px;color:rgba(255,255,255,.72);text-align:center;flex:1 1 320px}
+.foot__tag b{color:var(--lime);font-weight:600}
+.foot__social{display:flex;gap:10px}
+.foot__social a{display:grid;place-items:center;width:38px;height:38px;border-radius:10px;
+  background:rgba(255,255,255,.09);transition:background .2s,transform .2s}
+.foot__social a:hover{background:var(--lime);color:var(--ink);transform:translateY(-2px)}
+.foot__social svg{width:18px;height:18px}
+.foot__legal{width:100%;border-top:1px solid rgba(255,255,255,.1);padding:14px var(--pad);text-align:center;
+  font-size:12.5px;color:rgba(255,255,255,.45);max-width:var(--maxw);margin:0 auto}
+
+/* ============================================================
+   WHO WE ARE (about section page)
+   ============================================================ */
+.eyebrow{display:inline-block;font-family:'Poppins',sans-serif;font-weight:600;font-size:15px;
+  padding:7px 18px;border-radius:999px;border:1.5px solid #1F7A45;color:#1F7A45;margin-bottom:20px}
+.who{display:grid;grid-template-columns:1.05fr 1fr;gap:clamp(24px,4vw,56px);align-items:center}
+.who h2{font-size:clamp(22px,2.7vw,32px);line-height:1.32}
+.who__q{margin-top:22px;font-family:'Caveat',cursive;font-weight:700;font-size:clamp(28px,3.4vw,40px);
+  color:var(--ink);line-height:1.15;max-width:16ch}
+.who__p{margin-top:22px;font-size:14.5px;color:var(--ink-soft);max-width:46ch}
+.collage{position:relative;min-height:clamp(300px,32vw,420px)}
+.collage figure{position:absolute;margin:0;border:6px solid #fff;border-radius:4px;box-shadow:var(--shadow-m);
+  overflow:hidden;transition:transform .3s cubic-bezier(.2,.7,.3,1)}
+.collage figure:hover{transform:rotate(0deg) scale(1.04);z-index:5}
+.collage img{width:100%;height:100%;object-fit:cover}
+.note{position:absolute;font-family:'Caveat',cursive;font-weight:700;font-size:18px;color:var(--ink-soft);
+  line-height:1.15;max-width:120px}
+.team__head{font-family:'Poppins',sans-serif;font-weight:600;font-size:clamp(19px,2.2vw,26px);margin-bottom:24px}
+.team{position:relative}
+.team__rail{display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:10px;
+  scrollbar-width:none}
+.team__rail::-webkit-scrollbar{display:none}
+.member{flex:0 0 clamp(190px,20vw,215px);scroll-snap-align:start;background:#fff;border:1px solid var(--line);
+  border-radius:var(--radius);overflow:hidden;display:flex;flex-direction:column;transition:transform .25s,box-shadow .25s}
+.member:hover{transform:translateY(-5px);box-shadow:var(--shadow-m)}
+.member img{width:100%;aspect-ratio:1.08;object-fit:cover}
+.member__b{padding:14px 15px 15px;display:flex;flex-direction:column;flex:1}
+.member__n{font-family:'Poppins',sans-serif;font-weight:600;font-size:15px;
+  border-bottom:2px solid var(--lime);align-self:flex-start;padding-bottom:1px}
+.member__r{font-size:12.5px;color:var(--ink-soft);margin-top:9px;margin-bottom:auto;line-height:1.45}
+.member .iconbtn{align-self:flex-end;margin-top:14px;width:30px;height:30px;background:var(--lime-soft);border-color:transparent}
+.team__nav{position:absolute;right:-8px;top:50%;transform:translateY(-50%);display:flex;
+  flex-direction:column;gap:8px;z-index:5}
+.doing{display:grid;grid-template-columns:repeat(6,1fr);gap:12px;margin-top:26px}
+.doing__i{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:18px 12px;text-align:center;
+  transition:transform .25s,box-shadow .25s}
+.doing__i:hover{transform:translateY(-4px);box-shadow:var(--shadow-m)}
+.doing__i svg{width:30px;height:30px;stroke-width:1.35;margin:0 auto 12px;color:var(--ink)}
+.doing__i span{font-size:12.5px;color:var(--ink-soft);line-height:1.3;display:block}
+.split2{display:grid;grid-template-columns:1.25fr 1fr;gap:clamp(24px,4vw,56px);margin-top:clamp(30px,4vw,50px)}
+.tl{display:grid;grid-template-columns:repeat(6,1fr);gap:6px;margin-top:26px}
+.tl__s{position:relative;text-align:center;padding-top:58px}
+.tl__s::before{content:"";position:absolute;top:23px;left:-50%;width:100%;height:2px;background:var(--lime-soft)}
+.tl__s:first-child::before{display:none}
+.tl__d{position:absolute;top:0;left:50%;transform:translateX(-50%);width:46px;height:46px;border-radius:50%;
+  background:var(--lime-soft);display:grid;place-items:center;z-index:2;transition:.25s}
+.tl__s:hover .tl__d{background:var(--lime);transform:translateX(-50%) translateY(-3px)}
+.tl__d svg{width:20px;height:20px;stroke-width:1.5;color:var(--ink)}
+.tl__s span{font-size:12px;color:var(--ink-soft);line-height:1.3;display:block}
+.chips{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px}
+.chip{background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px 16px;font-size:13.5px;
+  font-family:'Caveat',cursive;font-weight:700;font-size:19px;line-height:1.2;box-shadow:var(--shadow-s);
+  transition:transform .25s}
+.chip:nth-child(odd){transform:rotate(-1.4deg)}
+.chip:nth-child(even){transform:rotate(1.2deg)}
+.chip:hover{transform:rotate(0) translateY(-3px)}
+.sectfoot{background:var(--lime-soft);border-radius:var(--radius-l);display:grid;
+  grid-template-columns:1fr auto;gap:24px;align-items:center;padding:clamp(20px,2.6vw,30px) clamp(22px,3vw,38px);
+  margin-top:clamp(32px,4vw,52px);overflow:hidden}
+.sectfoot__t{display:flex;gap:16px;align-items:center}
+.sectfoot__t>svg{width:30px;height:30px;color:var(--ink);flex:0 0 auto;stroke-width:1.4}
+.sectfoot__t p{font-family:'Poppins',sans-serif;font-weight:500;font-size:clamp(15px,1.7vw,19px);line-height:1.5}
+.sectfoot__t u{text-decoration-color:var(--violet);text-underline-offset:4px}
+.sectfoot svg.art{width:clamp(180px,22vw,290px);height:auto}
+.builtwith{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:22px 26px;
+  display:inline-block;margin-top:clamp(28px,4vw,44px);font-family:'Poppins',sans-serif;font-weight:600;
+  font-size:clamp(16px,1.9vw,21px);line-height:1.4}
+.builtwith .v{color:var(--violet)}
+
+/* ---------- view switching ---------- */
+[data-view]{display:none}
+[data-view].is-active{display:block}
+
+/* ---------- responsive ---------- */
+@media (max-width:980px){
+  .hero{grid-template-columns:1fr}
+  .hero__copy{padding:44px var(--pad) 40px;max-width:none;margin:0}
+  .hero__art{min-height:300px;order:-1}
+  .hero__art::before{background:linear-gradient(180deg,rgba(248,246,241,0) 55%,var(--cream) 100%)}
+  .honest,.mtc,.proof,.stories,.community,.who,.split2{grid-template-columns:1fr}
+  .cards3,.cardsWide,.doing{grid-template-columns:repeat(2,1fr)}
+  .videos,.roles{grid-template-columns:repeat(3,1fr)}
+  .stats{grid-template-columns:repeat(3,1fr);gap:26px 14px}
+  .qgrid{grid-template-columns:1fr 1fr}
+  .journey,.tl{grid-template-columns:repeat(3,1fr);row-gap:26px}
+  .journey .jstep:nth-child(4)::before,.tl .tl__s:nth-child(4)::before{display:none}
+  .banner__in{grid-template-columns:1fr;gap:20px}
+  .banner__cta{text-align:left}
+  .banner::after{background:linear-gradient(180deg,rgba(255,255,255,.92) 0%,rgba(255,255,255,.6) 60%,rgba(0,0,0,.25) 100%)}
+  .collage{min-height:340px}
+  .team__nav{position:static;transform:none;flex-direction:row;justify-content:flex-end;margin-bottom:14px}
+}
+@media (max-width:640px){
+  .nav__links{gap:14px}
+  .cards3,.cardsWide,.videos,.roles,.doing,.qgrid,.stats{grid-template-columns:repeat(2,1fr)}
+  .journey,.tl{grid-template-columns:repeat(2,1fr)}
+  .journey .jstep:nth-child(odd)::before,.tl .tl__s:nth-child(odd)::before{display:none}
+  .wcard{flex-direction:column}
+  .compare{grid-template-columns:1fr;gap:20px}
+  .vs{margin:0 auto}
+  .flow__step{width:auto;min-width:52px}
+  .sectfoot{grid-template-columns:1fr}
+  .sectfoot svg.art{margin:0 auto}
+  .foot__in{justify-content:center;text-align:center}
+  .note{display:none}
+}
+</style>
+</head>
+<body>
+<!-- ══════════════════════════════ NAV ══════════════════════════════ -->
+<header class="nav" id="nav">
+  <div class="nav__in">
+    <a class="brand" href="#" data-goto="home" aria-label="Xcelerator home">
+      <img id="brandMark" alt=""><span data-bind="brand">Xcelerator</span>
+    </a>
+    <nav class="nav__links" id="navHome">
+      <a class="nav__link" href="#" data-goto="about">Who we are?</a>
+    </nav>
+    <nav class="nav__links" id="navAbout" hidden>
+      <a class="nav__link" href="#" data-goto="home">Home</a>
+      <a class="btn btn--dark" href="#community" data-goto="home" data-hash="community">Become a part
+        <i data-lucide="arrow-right" class="arrow"></i></a>
+    </nav>
+  </div>
+</header>
+
+<!-- ══════════════════════════════ HOME ══════════════════════════════ -->
+<main data-view="home" class="is-active">
+
+<!-- ─────────── HERO ─────────── -->
+<section class="hero">
+  <div class="hero__copy">
+    <h1 class="rv">What if<br>education actually<br>
+      <span class="mark mark--hl"><svg viewBox="0 0 400 60" preserveAspectRatio="none" aria-hidden="true"><path d="M3,32 C70,24 140,38 210,31 C280,24 340,37 398,29 L397,55 C338,62 278,50 208,57 C138,64 68,52 4,58 Z"/></svg>prepared you for life?</span>
+    </h1>
+    <p class="hero__sub rv">At Xcelerator, we're building a future where learning isn't about marks, lectures, or memorizing.<br>
+      It's about <b>building, exploring, creating, failing, and growing.</b></p>
+    <div class="hero__cta rv">
+      <a class="btn btn--lime" href="#community">Explore Xcelerator <i data-lucide="arrow-right" class="arrow"></i></a>
+      <a class="playbtn" href="#story"><span class="ring"><i data-lucide="play"></i></span> Watch Our Story</a>
+    </div>
+  </div>
+  <div class="hero__art" id="heroArt"></div>
+</section>
+
+<!-- ─────────── LET'S BE HONEST ─────────── -->
+<section class="sect band-cream2">
+  <div class="wrap honest">
+    <div>
+      <h2 class="rv"><span class="mark mark--stroke m-violet"><svg viewBox="0 0 400 60" preserveAspectRatio="none" aria-hidden="true"><path d="M8,46 C120,38 250,54 392,44"/></svg>Let's be honest.</span></h2>
+      <div class="honest__lines rv">
+        <p>You probably spent years solving equations you'll never use.</p>
+        <p>Memorizing chapters you'll forget.</p>
+        <p>Studying for marks instead of mastery.</p>
+        <p>And somewhere along the way...</p>
+        <p><b>Learning stopped being exciting.</b></p>
+      </div>
+      <p class="honest__punch rv"><span class="v">But,</span><br>That isn't your fault.<br>
+        <span class="v mark mark--stroke m-violet"><svg viewBox="0 0 400 60" preserveAspectRatio="none" aria-hidden="true"><path d="M6,48 C120,40 250,56 394,46"/></svg>It's the system.</span></p>
+    </div>
+
+    <div class="compare rv">
+      <div class="compare__col">
+        <span class="pill pill--old">The old way <i data-lucide="x"></i></span>
+        <div class="flow" id="flowOld"></div>
+      </div>
+      <div class="vs">VS</div>
+      <div class="compare__col">
+        <span class="pill pill--new">The Xcelerator way <i data-lucide="check-square"></i></span>
+        <div class="flow" id="flowNew"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── LEARNING SHOULD FEEL LIKE THIS ─────────── -->
+<section class="sect band-white" id="story">
+  <div class="wrap">
+    <p class="lead rv">That is why, we think <span class="v">learning</span> should feel more like
+      <a class="link" href="#how">this</a> instead—</p>
+    <div class="cards3" id="feelCards"></div>
+    <p class="closing rv">Because, learning should be something you <span class="v">experience</span>, not something you <b>survive</b>.</p>
+  </div>
+</section>
+
+<!-- ─────────── IMAGINE IF LEARNING WORKED LIKE THIS ─────────── -->
+<section class="sect">
+  <div class="wrap">
+    <p class="lead rv">Imagine if learning worked like
+      <span class="mark mark--hl mark--butter"><svg viewBox="0 0 400 60" preserveAspectRatio="none" aria-hidden="true"><path d="M3,34 C90,26 200,40 398,31 L397,56 C240,62 120,52 4,58 Z"/></svg>this…</span></p>
+    <div class="journey rv" id="journey"></div>
+  </div>
+</section>
+
+<!-- ─────────── HOW WE MAKE LEARNING EXCITING ─────────── -->
+<section class="sect band-cream2" id="how">
+  <div class="wrap">
+    <h2 class="rv" style="text-align:center">How We Make Learning
+      <span class="script" style="color:var(--violet);font-size:1.25em">
+        <span class="mark mark--stroke m-violet"><svg viewBox="0 0 400 60" preserveAspectRatio="none" aria-hidden="true"><path d="M10,50 C120,42 250,58 390,46"/></svg>Exciting</span></span>
+      <i data-lucide="sparkles" class="spark" style="width:26px;height:26px"></i></h2>
+    <div class="cardsWide" id="excitingCards"></div>
+  </div>
+</section>
+
+<!-- ─────────── MORE THAN A COMPANY ─────────── -->
+<section class="sect band-violet">
+  <div class="wrap mtc">
+    <div class="rv">
+      <h2>More Than<br>a <span class="script" style="color:var(--violet);font-size:1.15em">
+        <span class="mark mark--stroke m-violet mark--circle"><svg viewBox="0 0 400 70" preserveAspectRatio="none" aria-hidden="true"><path d="M318,16 C250,3 118,1 58,14 C8,25 6,46 34,54 C86,70 312,68 366,50 C398,39 394,20 336,11"/></svg>Company</span></span></h2>
+      <p>We're not just <b>building products.</b><br>We're <b>starting conversations.</b></p>
+      <p>Education needs better questions.<br>So we ask them.</p>
+    </div>
+    <div class="videos rv" id="videos"></div>
+  </div>
+</section>
+
+<!-- ─────────── PROOF + STORIES ─────────── -->
+<section class="sect band-white">
+  <div class="wrap">
+    <div class="proof">
+      <h2 class="rv">Ideas are great.<br><span class="script" style="font-size:1.1em">
+        <span class="mark mark--stroke m-lime mark--circle"><svg viewBox="0 0 400 70" preserveAspectRatio="none" aria-hidden="true"><path d="M312,15 C244,2 112,2 54,15 C6,26 4,47 32,55 C84,70 306,67 360,49 C392,38 388,19 330,10"/></svg>Impact</span></span> is better.</h2>
+      <div class="stats rv" id="stats"></div>
+    </div>
+
+    <div class="stories">
+      <h2 class="rv">These <span class="v" style="color:var(--violet)">stories</span> say more than we ever could.
+        <i data-lucide="heart" class="heart"></i></h2>
+      <div class="qgrid rv" id="quotes"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── COMMUNITY ─────────── -->
+<section class="sect" id="community">
+  <div class="wrap community">
+    <div class="rv">
+      <h2 class="script" style="font-size:clamp(30px,4vw,46px);line-height:1.1">Become a part of<br>
+        <span style="color:var(--violet)">the community</span></h2>
+      <p>Different people. One belief.<br>Let's build the future of learning—together.</p>
+    </div>
+    <div class="roles rv" id="roles"></div>
+  </div>
+</section>
+
+<!-- ─────────── CLOSING BANNER ─────────── -->
+<section class="banner" id="bannerSect">
+  <div class="wrap banner__in">
+    <h2 class="rv">The future of learning<br>won't be built by<br>
+      <span class="script v mark mark--stroke m-violet" style="font-size:1.15em;color:var(--violet)"><svg viewBox="0 0 400 60" preserveAspectRatio="none" aria-hidden="true"><path d="M8,48 C120,40 250,56 392,44"/></svg>one company</span>.</h2>
+    <div class="banner__list rv">It'll be built by learners.<br>Teachers.<br>Parents.<br>Founders.<br>Creators.<br>Mentors.</div>
+    <div class="banner__cta rv">
+      <span class="script">Become part</span>
+      <strong>of the story</strong>
+      <a class="btn btn--lime" href="#community">Explore Xcelerator <i data-lucide="arrow-right" class="arrow"></i></a>
+    </div>
+  </div>
+</section>
+</main>
+
+<!-- ══════════════════════════════ WHO WE ARE ══════════════════════════════ -->
+<main data-view="about">
+<section class="sect band-cream2">
+  <div class="wrap who">
+    <div class="rv">
+      <span class="eyebrow">Who we are?</span>
+      <h2>We weren't trying to<br>build another EdTech company.<br>We were trying to answer one question.</h2>
+      <p class="who__q"><span class="mark mark--hl"><svg viewBox="0 0 400 60" preserveAspectRatio="none" aria-hidden="true"><path d="M3,30 C90,22 210,38 398,28 L397,55 C250,61 110,50 4,57 Z"/></svg>What if learning actually prepared people for life?</span>
+        <i data-lucide="sparkles" class="spark"></i></p>
+      <p class="who__p">We're a team of dreamers, doers, builders, storytellers and question-askers, working together to reimagine the future of learning.</p>
+    </div>
+    <div class="collage rv" id="collage"></div>
+  </div>
+</section>
+
+<section class="sect sect--tight">
+  <div class="wrap">
+    <h3 class="team__head rv">The <span class="script" style="font-size:1.2em">
+      <span class="mark mark--stroke m-lime mark--circle"><svg viewBox="0 0 400 70" preserveAspectRatio="none" aria-hidden="true"><path d="M312,15 C244,2 112,2 54,15 C6,26 4,47 32,55 C84,70 306,67 360,49 C392,38 388,19 330,10"/></svg>humans</span></span> behind Xcelerator</h3>
+    <div class="team rv">
+      <div class="team__nav">
+        <button class="iconbtn" id="teamPrev" aria-label="Previous team members"><i data-lucide="arrow-left"></i></button>
+        <button class="iconbtn" id="teamNext" aria-label="Next team members"><i data-lucide="arrow-right"></i></button>
+      </div>
+      <div class="team__rail" id="teamRail"></div>
+    </div>
+  </div>
+</section>
+
+<section class="sect sect--tight band-white">
+  <div class="wrap">
+    <h3 class="team__head rv" style="margin-bottom:0">What we're probably doing
+      <span class="mark mark--stroke m-lime"><svg viewBox="0 0 400 60" preserveAspectRatio="none" aria-hidden="true"><path d="M8,50 C120,42 250,58 392,46"/></svg>right now…</span>
+      <i data-lucide="sparkles" class="spark"></i></h3>
+    <div class="doing rv" id="doing"></div>
+
+    <div class="split2">
+      <div class="rv">
+        <h3 class="team__head" style="margin-bottom:0">Our <span class="script" style="font-size:1.2em;color:var(--ink)">Journey</span>
+          <i data-lucide="sparkles" class="spark"></i></h3>
+        <div class="tl" id="timeline"></div>
+      </div>
+      <div class="rv">
+        <h3 class="team__head" style="margin-bottom:0">Things you'll hear us say
+          <span class="mark mark--stroke m-lime"><svg viewBox="0 0 400 60" preserveAspectRatio="none" aria-hidden="true"><path d="M8,50 C120,42 250,58 392,46"/></svg>often</span>
+          <i data-lucide="sparkles" class="spark"></i></h3>
+        <div class="chips" id="sayings"></div>
+      </div>
+    </div>
+
+    <div class="sectfoot rv">
+      <div class="sectfoot__t">
+        <i data-lucide="heart"></i>
+        <p>We're not here to follow the existing path.<br>We're here to build a new one. <u>Together.</u></p>
+      </div>
+      <div id="togetherArt"></div>
+    </div>
+
+    <p class="builtwith rv">Built with people who<br>believe learning can<br>be <span class="v mark mark--stroke m-violet"><svg viewBox="0 0 400 60" preserveAspectRatio="none" aria-hidden="true"><path d="M8,48 C120,40 250,56 392,44"/></svg>better.</span></p>
+  </div>
+</section>
+</main>
+
+<!-- ══════════════════════════════ FOOTER ══════════════════════════════ -->
+<footer class="foot">
+  <div class="foot__in">
+    <a class="brand" id="footBrand" target="_blank" rel="noopener" aria-label="Xcelerator on LinkedIn">
+      <img id="brandMarkLight" alt=""><span data-bind="brand">Xcelerator</span>
+    </a>
+    <p class="foot__tag">The best way to predict the future is to <b>build better learners.</b></p>
+    <div class="foot__social" id="social"></div>
+  </div>
+  <div class="foot__legal">© <span id="year"></span> Xcelerator. Learning, out loud.</div>
+</footer>
+<script>
+/* Brand marks, embedded so the page is a single portable file. */
+const LOGO_DARK  = "data:image/png;base64,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";
+const LOGO_LIGHT = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAKAAAACgCAYAAACLz2ctAAAfdklEQVR42u2da4wkV3WAz7n3VvVjZl94d2wICXGAPCYP3oFEIDk/IiInBsvLjiBAHEE2sn9AbGwZP1im1yYiiYLigESw9+ldbAzYDsSQgCIhC+VHQkIUBXlsB5j8gJC4R/Z6xt3T3XXr3pMffU/N7Zrq6e6Znume6TpSqXtme3uqbn11XvfecwByySWXXHLJJZdccskll1xyyWVSBPMh6D4mRDQeJ4SYnI97TzmAewi4LNAqlcq6sVlYWNix8ZqdnaWMc6IucFIO4B4Aj6Fj0KrVasf41Gq1jp8bjcbQxq9UKnWczPT0dPLzzMwMZYGZBhIRKQdwFwgRYS/oarUaMmBRFCEAgNYaAQCMMX2PG39WStk3HPzZIAgIACAMQ2JIGcyZmRliGHcziBMNoA9fGrwoilBrjcYYNMagtRattQgAwK9pmLfo5yXQCCGIX4UQJKUkKSUFQUBpGLNA3E1mGXP42vAxePV6XTB0cRwLay0SERIRA4j8Hf4rIhL/7MO0EaD8f/jzqVfyQLRCCFJKWR/GAwcOWDbXDOJug1BNYoSbhm9paUmwxouiSMRxLIwxwhgjAACttcJBKHwAU++HpQGJAfRAtIho4zgmIYRVStkoikhrjc5MW8+lYPAJ2xRSDuD4aL+OiNaHr9lsCq21cFpPGGOktVbUajVyNxG9V4YZU1YkC0bK+LduUPjfT94rHxYAxKFDh4QQwlpr0RhjXUBEAGCr1SpeddVVtlKpILUvGMfZJ5w0DQiVSgV9s+vDp7WWxhhhrZXWWlmv1/Ev77331T935ate1mo1MY6NYF+wbZotWrt1DSjEGiCIbb+PD6WkFShIBYEtFAr20S994T/OnTv33IEDB5RtizHGoNbasm+4sLCAfrTsm/kcwDER9vm01ujBJ40xkoiktVYBgP7dq995/KVXXPEHtdqLIz/nIAjgDa993T9dccUVxz/5yU8+u2/fPuUeBuO0IQKAWVxcFABg2RxXKhUaVwgnEsBqtZoEHCmfj+ELHICCiJQKAnA+GPKsxCik1WzB4cMveevNN996rtEwf3TvvX/xv9PT04HzRQ0AwMrKCkRRZBcXFwEA7LhrwokCkM0v5/Y40o3jWFprffgCIgoAwBpjAkCEQrFE1GiAtWZ0ERQCNJtNu3///rfcccdHz01Ph8c/8YlP/M/U1FTgRerJCTKE46wJxaSlX9j8suk1xggiYr9PWWsVEQVEVACAgjFxAG4OtlgqkRCjH7Jms2kOHNj/pg9/+Kbzt99+4hX1ep2MMUEcxyqOY9lqtWSz2RTLy8ticXFRLCws4MLCAnL0P6zIPQdwk9JoNJLksgs6BBFJImL4AgAIAaBItGYlxg3Cffv2v/YjH7npzIkTJ362Xq/bjSCsVqtjCeHEAcgzHgyg858YQOnckgRCG5ug0wwKKJZKhDj6oWu1Wmbfvn2v+dCH/uTcyZMnX7W6utoVwlqthuMI4UQGITy363ymBD5fCwJAAADSglXrfbE2hM1GA4nsGEC4/5dvvPFDZwHUH83P3/X9crkcdPm4TeUcRx6YTJwG5BUtbH6d9uNZDskHQ+i0YkbuTrA5HrlD34Zw+hdvvPGGM/fc82c/n6UJ6/W69DXh3NycyPKPcwC3UTgC1lonCwvc4AvvYDOs2loQuy5jEUJAoViCUaZmfAinp/f9wg03/PHZP//zT/2SD2EURSqOY7ERhDCidQETm4j2Bp3nc9kXFAAgjTESABSRlRs+wW0IqdlsIIx4BXUUtczU1NSrP/jBD5xRSh2/5ZY/eZLNcRzHBABQr9c7zPHc3JyYnZ2lUU3bTWQUzAEI586gnXBONCARSSml04Qke03nSymhVCrROOTXoigy5XL5lddf//4zn/rUX/8ya0KtdRDHsczShKMMTCZOA/qrmD3Nx4sKBL86DSgBUPSzoEQIOUaaMDLl8tSV119//Rkp6fhNN930vXK5rLTWvJYxTmvCUQUmE6kBffHg8yFMtCFi/2MkpcRisTQWswxtCEtXvu99f3j6M5/5m9esrq5al2iXG/mEO60JJ9YEZwxwB4hSSgEAAmGwhJ+UEgrF4jhB+LPvfe97znz2s599HZtjY0zXwGSnzfFEByEZ2i853MoS3Ex0qFQAWBLUbKziOEBYKBR/+t3v/v3TQgTHb7jh+L+Xy2WFiNQtMNlJczzxJniD6Lg9PmJzOZa2JhwPc6y1NoVC8eVzc3OnPve5U6/vJzDZKXOscta6wud+2HySTykFUCxSq9nE8YCw8PK5ublTAHD8hhuOf7dcLqs4jmmUgUmuAXvSuLUss1LBmGnCwsuPHTt2+syZM29kTWitlaPShDmAfTC4VXqUUm4BA4581kRrbYrF4k9de+3R06dOnX3j6uqq6TVjsp2BSW6CM2ITHz4UAoexr0xKBWGhQFGrJYQQYK2lEUP4sqNHrzsFYI4fP378X3vNmGyXOZ4oDZgutdHXAA3peUdEEEKar3zlse/U66stKdVIx94FJi87evTYqdOnz/06a8KdDkwmCkC/xkq/QUh7ITwNC0L5yJe++Ezl43d+rdlstJQaDwivu+6602fPXnjL6uqqsdaqbhACtBd0DBPC3AfcYdl/4CB+4QsPPV2ZP/F3q6uN5nhAWLji2mvfcerChTUIeSmXD+F2rKzOAdzYBwQUw40ahBAxAMDFC+efPjl/4m8bYwNh8fJrrnnn/Qwhm+PtDkxyAPswnEOh2t0kgSIGAI2IdPHi+acrJz/2yOpqozEOEIZh4QofQmut2u5puxzAnj7gcEUoEQNAhIhaCEEXH3jgqfkTd31xdXW1HgTBuEB436lTZ9/EEG6UJ9wqhDmAPWAUQ07cSSE1ALTcEQkh7IMPXnjqYx+78wu12ovjAuFLjx697hRD2Cs6Blgr+DQohDmAPXxAGrJGlEpqAIjc0WQIH37o80+dOHHn58cFwnaKJoHQdgtMarUapksXDwJhDuBgPG4dQKl8DdhyELbaED701IkTd12ovfhibZwgvO++M2/wZ0wYQn/f8RNPPCFSdbUxB3AMRal1AKYgfPCpu+68/fzKiysr4wLhsWPvuv9znzu1DkKttWg2m6LRaCBrQs8U5xpwGEHIsKsgyDUAm90g/NKXHn76zo/edm5leWV5PCBsr6K5//6zr/eiY6m1llprUa/XRaPR2FRQkgPYB5DDNMJKSo6CW4jYRMSmB2MTAJpCCPvoo1/+rztuv7UNYRiOBYTvetfR0/fff/b19XrdGGMSCKMoEvV6vSMoyX3AsTXBAWvAJBBJgZhA+Nhjj37/o7ffcu6FSy8sh2MC4dGj152+774zr/UhjKJIGmPQD0o8fxBzAEcZdaz3AWMA4Ei4wwSnQRRC2K889tj3b7v15rOXnn/+UhgWRg5hsVh8+bFj7zpz6tS5X63VajGXMnZFPpFNsRcR5xpwKz7gsEVKaVj7OTPs+4BNBtGH8PHHv/qDm2/68Nnnnn/u+TAIJJ8k4g4faxD+zNGj1509e/bir9RqNWOMkXEciyiKRBRFmKEFcwDHRYJA8VRclAbRBy8N4Te+8feLN9/8obPPVqvPAYBsaQ1RtMOH1qC1hlq9bqRUV7797b995pZbbnnpysoKWWtFHMeZWnBDi5AjsbMilTIAEEO7DIaBtUWebh8yWmqX3CJETEyYEKL4zX/4h/++4cY/PnfvX33mA4cOHXqJ1trAiFZYNxotC0hXvuIVr7wCAP7PGCOFEDaKIsEdnlyCmnIN2K/ztwP7YIWQFgAMIrIvqJ0WjJw5bvpmOa0J//Gb3/zvW279yLnl5eVLYRjKrvtKt/tAAAQ0kY0kAEhrrXAHaq0x3VcvB3BzvuDQgZRSWAAwABAjYoyI2h0JhOlgZJ05/vuvLd7+0VvPLy8vv6BUIEc5SHEccz2dBEC/l57zAzEHcFxMsNOAfGRBmApQMiH86le/8oM777jt/MrK8rJSamQQRlEkwRV3YgDbJnrND9woEs4B3OFIGEXShss6HzBLE7YAoNULwscee/T7d95x27kXV14cFYTo4oik0KfrMoVchTY3weNGNgpuucW+IB+xWyOohRCREIJNcU8I77rrtgfq9drKSCBsm2A+OrqK9uMH5gCOKN7hgzWhECJ2R9oc99SEjzzyyDMnPnbXhXq9/uJOQ6jX6ismZe44ENnJNAwSjXdn0EqlgouLiyKKoqQ4pR/U+R0wdwpCryumdQcREQohyFoLLlWDbh9uUsXV/z0AoBCi+PDDDz0tpbxQOXnP9eVyedoYsyMddUxbA2aNI/STihkYwG6piqysNy9UnJ2dpfSixUGlWq0ib6v032/0Of93tVoNl5eXRbPZTDpi8lPrVUcVG4A5dGu81lGVzTMSIpK1FoQQxlorXLpGZIAnEDGp7CqEKD744MWniezFu+/50/eXSjsDoT9ePFbpSHgoGjB9I3zgstrd+59dXFzsqEy6WVlaWsp8v9HnvGgNm82maLVaktuxugr4InWkU15DFdvuQSw8bSuISCCizTDT1v2ek9eCiCQianfuHYcQovDQQw8+gygeOnn3Pe8rlcrlHdKEmKo2CxwJDwtA7AZeutU932z2AdJPQr9PxtBvvLXcAV3Ecaz8viDuBvpV8n0Yh2uyrOG/AZ5mE65P3Ub+YhK4eEDGiBgTESe1pRCi8OCDF59RSj184uOV95RKpSL3FN4OEZ0WY2BRfdLdAV+6zT0AgN/qnqOg9Oso+1F4PeH4ZnNfOJUBYgKhHUZD4I7zsJy45fEnAGCzy8Dx1BymIfSm6nzNGLvvMgBghBDqgQfOPYOIXz7x8fljxeL2Qpi2kkQ0PBPsw5el8Rg8rbXfzJkTkskJ+Sc3qgwIt2FgAF1fONcPBJR7rzyzNvQsgYlj6eXOrOego7VWwFoxIL9thEhpGfJBdO+Npx2tEEKdP3/2aWvtYx+fv/toqVQsbAeEeu0+b+r+9gJw3ZcxeOxTcctT12+3o/NQRhV6GEK0mW5rjwMAyD5XR0su98rwKc+/EsN+YGITS/c3GRzwnHj2+Xzn3vdVs0wdm2ffTFsAICFEcOHC+f9CxK/OV+6+NgzD0Hax85u+F1uEWg2q/Xz4tNaC++2yeavVasZ7qkUKtmGkOgbeeZX6fLeb2JGf4xtJQ84vvXDpEgBAUp95g/NI3Ffv3A2sr+aPGQGU/z544IFzC60ogpMn77mmXC4Xh3lNZov3s6cJ9uGr1Wod8Lk298IYo9hcfP3rX3/LzMzM5cYYiOOYp2cy/ULP71lzats5MOwSSHTdJNTP//Pas6Lb1SXjOJZRFCmttYqiiOuhhM1mM4zjOJgql6eGVcsPEeDad7zj9b/x5je9REpJYRjGQghTKBSMlNJKKa0QIml4w2PH52yMEf55a62V1lrFccwVrZTWOjDG8GtgjOF+cfTkk//5gze/+Td/ZRsCY9o2AH3Ty3m0NHzWWrW6uioBgN72trd9ZN++fb+1V6YsVmpNEw/Hd6JyMYSrr/6dD47wckyj0aTnnl8Ga+0Wq7UiEFmw2tK2akDO7zUaDdRaY8rnUy6aZB+K4ji2ndp5Vws5R3/L01vlUgDFMBj5uJRKRTh8GcJzzy+DMWZLECICWbs1c94zyuMkcxRFCXxxHEtuce858yEAFFwkt2dkGD77VClk+MZCisUCHL7sIEgpYavuoIEYtgVAIko2lfDMhsvzcT5NunSG3+K+YNqZ/j0DH22x8dtUKYRCOH47HwqFEA4fPghKbQ5CxHaQSvE2a0CA9pQKz6E6h9hPZexpDbgX4UsgDEM4fPgQKKU2BSERbLnYek9Y/N1NnFzmZK7LT3EiNwCAQtxOtO4JEUJsuk/IVHm84WMJgwCOHD4IwYAQtnO9QNsOIPt/WutkxauDr0MLMoSjnG7bJsFBPzxdDqEQ7J4Nh0EQwOEjhyAIBtWE5Aed7Yz6gO0bBjKX3vIlTK3GYADDPWWCrUUcKExEmCqHEAa7b7droBQcvmwwCNsrw9b6iGymd0hPWGq1Gmqt/WTyup66Poh7zQfstzoWIsB0OdiV8K1pQgVHDh+CMAz6hZCsNeQrqKECyCkYb2WDP0Huv2ctqPaUCW7Dh31oApgqFXY1fCzKacJ+ICQiiqymLA0opaQtA5hKSaC/7t9bpSE9c6z2oA+44TwTIsJ0OYQw2DOxFygl+4WQbBRRlmkGACiVSuwXbh7ArFWt3kqN9Gpi2W0+di+GIAxfoORee+Z6QoiIQADWGODFJ5lByOzsLA1lX7Cv/TKOZBHnXtSAkwZf35qQgKzVW5oqElvUDVkg5vDtOQgPZkGIAEBaJ4WUqJu3siUTPIAW3JZNPDl84xyYkI3jZmKCeVefEIL8IGRTJtinto/1/TuxjTGHbww0YRCsQUhEpLX2fcDhaUCf2n5D6j0rNNnwdWjCwwddshoA2yvGDbT3pSRmWAhBAADT09M9uckXDvQFH0w8fCw8YxIGCiyB0VrHvgZk+LhIZU+od8E1j/SuSylssaBoiPDteoqDQMHll18G+n/iwAGYlBZhH7BvrTrubte3v/3tf/vxj3+81HYlkNLHppRa55y2fyQLLnh76e/93jW/dvnlMwdhbXPQpq/FWkvf+ta3/vnZZ599ARFhWNczBN82yeE5gCwikpTSCCGsUspIKU0QBDEfxWLRrK6uPv+Tn/ykUSqVyAcQACAMw44gpJsfOO4AiosXL3739OnTT7ogx9+QTb2c3z5SR+mKCMmUojvkk08++YrLL585NKwL+vSnP/0vjz/++KL70b+WZDvlzjgWHRmL9G5Af8N7DO1i6n6LsaS5TqFQQAesRUTrR8Bco2ejIKQvAEdVTgMA4LLLLgNo7/ZH6CxN4e+HHRRA3rZIHnzo/Y6rU4FSw31GDx48aN31gLuObg/VCLzdZDyN25/sPxTkQEJEFIgoEVG5MnIWEZNdfVJK4mm4oWjAUUbBrrlf08ERewDyJu5+bxqPgF9tIGtJmT/owbDNolKK27SCp2Fs6nrsiADkw/ia0FXoStpLuEO7oppGCGHYbAshKAgC4gi4UqnQrg5CgiCIAKDhHj0fQJN+QvvVfojoA+gvqDVpMzhsAL3rIe/G+tdix0ALWu/8rA+hg44B1K6oppFSGqWUDcPQsv83Ozvbc5Hq2AMYhmEM7aqg4PyQ5Kb10BjkmVT00k6YXkKGiAHns7wbjxz4bIcGdN/rXw/XjE4DiKn3vQDyP9ftO7p9rqMqhGeG/YLqyeHDJ6W0QRDYIAioVCpRt/qNuw7AQqEQeyZLI6JOa42N5iF9DegXdvS0X+DD7NVqEe6zw9aA7FJQxvUYp3ksDFb3pltwsdHD2A1e/6Hmc+HxibmmtRAillLGXqRsXbUH6icBvZs0IEdf4Gom65QptqnijpTh94GnAflQRKQQ0XhVqsiLjmNody7aDgBb7rx1+nr87kkDwANdHkDsU5Oma9L4D0GiCb161oY1nxDChmFowjC0U1NTloOP2dlZ6uX/7QoAubmfM8Et1hh80zwzsZEZ4vAtWcFNRIbhc7WZOcKTXpm2oY+PAzBy5x1lXE8WgFlAdQuyqIsJhh7/1/fXksUF0FnDmlMtls0u+31seqenpzvMb68tNbshCOHqn8TOL2sNZw58M7xh8hnW+llIP+DgIuAOTuWbxGFrwDAMjbse0+V6jHfzRxGE+EEDJ8g5yWyFEMQmNwgCK6Uk1nwMX0r7DS8KHsWgqHZzP+3+NqcCtGtnYPwK870A9AtUEpFfeo01I0d6fpS9LQ+UO2edldIYFYD+jAgPG0+rCSEYPhJCEGu9MAwpDd9A93egx2MES62EEBwlkhf682HYHGx0w3iqzWuoZ621iVbklIyrt2wyApxh3mTjaVidTmc438qOalrOjTn57/lnKSVJKSkLPD/twtqvn2sYew3oNAJruqSZC0dgSinDEdhG3+NX9fKKQ3JZXAkAJlXmdls0oJTS75AU+xGlUioOgsCkF3TuoL9NGRq7Y26Xg4ws8AaFb7cEIdaLdjkFwIlPUygUTLFYtPxE+v+30Wgg/87VNiStNXmLD2IXdJguyWA77AY83vUkEPL1BEFgisWiYZ/KP/9e4n+2W3sE/zvTn8/6O+l0ih9cZEG3GUU19ibYXYyfCkhWaBQKBbN//35z5MgR2yvxWa1WaWlpiVZWVsBaa9xqFwmpyvPufZIHG2Rp0QAArosqlVImCAI7NTVl+7me7ZaNfLlu6ZXNWMix14DW2nV7DhiMYrFojxw5Yq+66irbK+dUqVTwiSeeSOrccClcl4IhDzyC7FrNw/Sv/Al+Ygd/kOsZhfgd3Iflko09gH5eCrxVty4So5mZGapUKtRHFAxzc3O0tLREXh3mDuAYxu2CLyPl4UM40PWMEsKhPpD9fGiUy7Fc9aWJ2Gs8iTL2e0KyttX72sGvX5hLDuBQtb3TvjSKv7uNaaWcukEBHOGCVKJxb0Q8eFA1bmOca8AeN8xOwo0YpZ899gCOcHBI6/XFbyalAFIO4BiY4C491bb1b+Y+YG6CE3/JmeCO7ZRcLjiKIgQAmJubE/Pz82J+fl74+3z55/n5eTE3Nyeq1SpGUYRcbBNSNW1SPXq3p2P6ZHgUfcu4J6Kp1WoRtJdLkQ9JHMei2WyKpaUlqtVqVK1WaWZmhubm5jqg4Z+r1SouLS0J7nfiqv0LWt/xO91tMpdJBrDRaLCmJteZSRpjJMN56dIlrNfrdnl5mZaWlrqaT+7y2Wq1pLVWGGP8VhN+uWEB21jtKzfBWwBwBNND1Gw2AdbqqXB7MIWIFEVRsrAgiiKq1+sbmb6OPndeox3eHedXSfD77+YyagA5Ch5B9GmjKAJYK35uwDWRNsYkq5zjOLbpVStuXhf51fl9SZsxa23g+twpbrgDa5vUfQhzH3BSTTARkVvbFjhzaMGVzeA9HNbarCX5mTvE/CaL3OPO25SuvM1IScWEPOUzBgCOKg1DRFCv1wW4FmD+7jUXmCR7QqC/fcH+rjjJTRbda7ITztOGucM2wRoQicj+6Ec/igHAunxg1nq9rT4c6e/zV0XbbWhvn8suAZCEEPLuu+++ptVqPQ8ARkrJm3dipVRMREZKyWViwd/pZozp8AuNMdZai67dLGqtpTFGaK1VHMcyiiIVRVGgteajYK0NDhw4sA9GU6clB3DUAEopg7e+9a3vHvF5pDe+5zIpQQgrr/w27V3JneydHvA8Eb15AMd1n0IuEwJgnhMbgkOZJ6JzE5xLboJzHzCXXAPmJjj3AXPJAcwllzEHcFJ3bOWyezTgKDv85DJJUXBWsSBIFdrJh7VnJiEfq0EAlFJSxoLP9JFP2g9mMXwg88oIgwxehhZMOurkT3WPAW8vEVtXFi7XgF2kVCol9YoztKBNH8OuKLrXxFVIpYyK9NBvOd6JADBdiNCrKLquj5jX1iDONeDG4op+JxBO+nh1BZCIsuoEd5TJ9fZjJA2OhRC5H7hxEGJTY0d+VfxB+2zsdum5IHV6epqWl5eTsriuXp9vdv22BlqtdXiWOW7r/D8IwxBgbZFtMq5+j90cwC7OM2s/d/h9NbidFn7ve9/7zvLy8iVrLcRxLL0GMR2VBnpN623UZXuY/2+zf4f9N//gps1KKeMKj3P1+9i9j3/4wx8usSbM3ZU+AQzDkOr1OvAgW2uNa9mewKeUkkQkr7766i9De59t6F553y1vc5SwN+qu+BmAxAJ4D2PkjmbqgFKphNyegSvk5wB2kZmZGVpaWgIpJffMYP+Fu01yW1MNAEJKGXo3hRtEg/ud9H8/4M3GTfzbdgPI+5FNKhjzW0sg9ydGRCWEiPymhOz/cYX8HMAuqZgoiqzWWrhtkNZtCo/d4KLbOM6gsXmOod2RXHgaEGHvVJ6yKS1oYa3hYQxr7Vj9hoSx1/I06Q8yiSmYDQHkKgRzc3PoAhEIgoD31lrXw43r9YGDkBu+GDfwClwVAugs+LNXFjd0mGEvI2A8CP2GhJp7wyGi5Tb3/heOc4+QkWjA2dlZqlarGIYhaa1JKWWttSaOY+A+u0IIXmjJN0B68AmnAfcygGyG/bSUcQDGnubjZosdTRa5zf2kpWD6NsEzMzNUq9UI2qUqUCllXRQbu0iS3AtXKeCW937QsdfMbxpAv8W934ww3RUz6TTuN3ueRP9voDQM56iiKEonmmNjDAghGEDpF330OpHjHgcwCdBgrRmh8Tt8cm/jIAhMEASWfb9JzP8lrl6PHBk6vwQXFhaQy9xytVGtteCij37tPa+UbkcJXO89wN5IwySv3gxHOlNgXX7Qstll+MIwJO6M6be5z33AtUAk6Y7o+Sd2aWlJOJMD3gyJMMYIpwU7in774O3wvhKEbVwkm16ckYIvmTuXUlrf7Pr9jdNt7ofdDHBXa8AsLQjQLvhdq9Ww0WhgvV4XxhjUWguuXs8Adpv92Cubm3wAU4t1+cG03lRbh8+X7jg+idqvXzPIiWSoVCoIAMDmuFarIUC7G7nWGo0xyPtHGEZ+v5fA6wYiz2gwdADthaZSSgqCgFjrMXys+Tz4ACZsW0O/QKyDMAtEbhXvmkInn+u2qckYg1JK4n/v9r6X8EqSrO/L+vtb+Tvp7846D4Bk2RX40HFGIavd/STCN1AgkNZeaRDZNPPvGEoWhnOvStZMhg9dyo9e1/Z+UhcmDAxFNzPqA+nLwsICzs7OEkM6rlKtVnEruTi+xqxkcgZsSXA36StihgKFNw8Me6y76nZGzbnkkksuueSSSy655JJLLrnkkstEyf8DalFklyif7o4AAAAASUVORK5CYII=";
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lucide/0.462.0/lucide.min.js"></script>
+<script>if(!window.lucide){document.write('<script src="https://unpkg.com/lucide@0.462.0/dist/umd/lucide.min.js"><\/script>')}</script>
+<script>
+/* ═══════════════════════════════════════════════════════════════
+   1. EDIT EVERYTHING HERE
+   Names, numbers, questions, links, icons and copy for every card
+   live in this one object. Icon names are Lucide icon names
+   (https://lucide.dev/icons) — swap the string, the icon changes.
+   Any `photo:""` is auto-filled with a generated illustration.
+   Drop in a real image URL to replace it.
+   ═══════════════════════════════════════════════════════════════ */
+const SITE = {
+  brand: "Xcelerator",
+
+  /* footer + button links --------------------------------------- */
+  links: {
+    email:     "mailto:hello@xcelerator.in",
+    youtube:   "https://www.youtube.com/@xcelerator",
+    linkedin:  "https://www.linkedin.com/company/xcelerator",
+    instagram: "https://www.instagram.com/xcelerator"
+  },
+
+  /* "Let's be honest" — the two journeys ------------------------ */
+  flowOld: [
+    { icon:"school",         label:"School" },
+    { icon:"file-text",      label:"Exams" },
+    { icon:"clipboard-list", label:"Marks" },
+    { icon:"graduation-cap", label:"Degree" }
+  ],
+  flowNew: [
+    { icon:"lightbulb", label:"Curiosity" },
+    { icon:"code-xml",  label:"Projects" },
+    { icon:"target",    label:"Skills" },
+    { icon:"rocket",    label:"Opportunities" }
+  ],
+
+  /* three belief cards ------------------------------------------ */
+  feelCards: [
+    { icon:"bike",             tone:"c--lime",   title:"Learn by Doing",
+      body:'Because nobody learns cycling from a <u>PowerPoint</u>.' },
+    { icon:"messages-square",  tone:"c--violet", title:"Learn with People",
+      body:'The right mentor at the right time changes <u>everything</u>.' },
+    { icon:"megaphone",        tone:"c--butter", title:"Grow Loudly",
+      body:'Your learning deserves to be <u>seen</u>—not hidden inside a résumé.' }
+  ],
+
+  /* "Imagine if learning worked like this…" --------------------- */
+  journey: [
+    { icon:"user-plus",   title:"Joins",     body:"Student joins." },
+    { icon:"hammer",      title:"Builds",    body:"Builds real projects." },
+    { icon:"users",       title:"Connects",  body:"Finds mentors." },
+    { icon:"wrench",      title:"Sharpens",  body:"Hones real, usable skills." },
+    { icon:"notebook-pen",title:"Documents", body:"Documents growth." },
+    { icon:"sparkles",    title:"Discovered",body:"Gets discovered by opportunities." }
+  ],
+
+  /* how we make learning exciting -------------------------------- */
+  exciting: [
+    { icon:"trophy", tone:"c--lime",  title:"Competitions.",
+      html:'<span class="no">Not for grades. <i data-lucide="x"></i></span><br><span class="yes">For growth. <i data-lucide="check"></i></span>' },
+    { icon:"globe",  tone:"c--sky",   title:"Real-world problems.",
+      html:'Because solving actual challenges is more exciting than solving textbook ones.' },
+    { icon:"target", tone:"c--peach", title:"Learning journeys.",
+      html:'Think levels. Think quests.<br>Think progression.<br>Not semesters.' }
+  ],
+
+  /* video diaries ------------------------------------------------ */
+  videos: [
+    { q:"Why are so many students searching for a different career path?", hl:"Why are so many", url:"" },
+    { q:"Can marks measure intelligence?",              hl:"Can marks",          url:"" },
+    { q:"What if projects mattered more than exams?",   hl:"What if projects",   url:"" },
+    { q:"Why do some people learn more outside classrooms?", hl:"Why do some people", url:"" }
+  ],
+
+  /* the proof ---------------------------------------------------- */
+  stats: [
+    { icon:"users",          value:10000, suffix:"+", label:"Students" },
+    { icon:"school",         value:40,    suffix:"+", label:"Campuses" },
+    { icon:"trophy",         value:100,   suffix:"+", label:"Projects" },
+    { icon:"handshake",      value:200,   suffix:"+", label:"Mentors" },
+    { icon:"map-pin",        value:15,    suffix:"",  label:"Cities" }
+  ],
+
+  /* stories ------------------------------------------------------ */
+  quotes: [
+    { text:"I never thought I could build something people would actually use.", name:"Rohan", role:"Project Builder", photo:"" },
+    { text:"This project changed the way I see problems around me.",             name:"Meera", role:"Change Maker",   photo:"" },
+    { text:"Xcelerator gave me mentors who actually care.",                      name:"Vikram",role:"Learner",        photo:"" }
+  ],
+  storiesUrl: "#",
+
+  /* community roles ---------------------------------------------- */
+  roles: [
+    { icon:"graduation-cap", tone:"c--lime",   title:"I'm a Student",         body:"I want to build real skills.", url:"#" },
+    { icon:"presentation",   tone:"c--violet", title:"I'm an Educator",       body:"I want to bring better learning into my classroom.", url:"#" },
+    { icon:"handshake",      tone:"c--lime",   title:"I'm an Industry Partner",body:"I want to create opportunities for learners.", url:"#" },
+    { icon:"lightbulb",      tone:"c--violet", title:"I'm a Mentor",          body:"I want to guide the next generation.", url:"#" },
+    { icon:"message-circle-question", tone:"c--lime", title:"I'm Just Curious", body:"I love conversations around education.", url:"#" }
+  ],
+
+  /* ── who we are ───────────────────────────────────────────────── */
+  team: [
+    { name:"Kaushik", line:"Believes education should create builders, not test-takers.", photo:"", url:"#" },
+    { name:"Ananya",  line:"Documents stories that inspire people to learn differently.",  photo:"", url:"#" },
+    { name:"Dev",     line:"Makes impossible ideas feel possible.",                        photo:"", url:"#" },
+    { name:"Ishita",  line:"Turns chaos into clarity and plans into action.",              photo:"", url:"#" },
+    { name:"Arjun",   line:"Builds tech that empowers learners to grow.",                  photo:"", url:"#" },
+    { name:"Nikhil",  line:"Asks the question everyone else skipped.",                     photo:"", url:"#" }
+  ],
+  doing: [
+    { icon:"coffee",       label:"Arguing over education." },
+    { icon:"book-open",    label:"Reading research papers." },
+    { icon:"video",        label:"Recording documentaries." },
+    { icon:"school",       label:"Talking to students." },
+    { icon:"bus",          label:"Travelling to campuses." },
+    { icon:"brain",        label:"Changing our minds." }
+  ],
+  timeline: [
+    { icon:"help-circle",  label:"One question." },
+    { icon:"flask-conical",label:"One experiment." },
+    { icon:"school",       label:"One campus." },
+    { icon:"users",        label:"100 students." },
+    { icon:"users-round",  label:"1000 students." },
+    { icon:"sun",          label:"Today… Still learning." }
+  ],
+  sayings: ['"Let\'s test it."', '"What if we\'re wrong?"', '"Go ask students."',
+            '"Ship it."', '"Let\'s build."', '"Did we actually learn something?"']
+};
+</script>
+<script>
+/* ═══════════════════════════════════════════════════════════════
+   2. GENERATED ARTWORK
+   Every photo on this page is a drawn SVG placeholder so the page
+   ships without stock imagery. Replace any `photo:""` in SITE with
+   a real image URL and the generated one is skipped.
+   ═══════════════════════════════════════════════════════════════ */
+const PAL = {
+  skin: ['#F0C6A0','#E3AC80','#C98A5E','#A56A42','#84512F'],
+  hair: ['#241C15','#3B281B','#15151C','#5A3A22','#0F0E13'],
+  top:  ['#22242B','#2C3040','#1B1D24','#3A2F45','#26302A'],
+  bg:   [['#EDE7FE','#DDD4FB'],['#EBF7CE','#D6EFA4'],['#FDEFCB','#F7DC97'],
+         ['#DEEBFB','#BBD8F5'],['#FBE3D2','#F6C9AC']]
+};
+const uri = svg => 'data:image/svg+xml;utf8,' + encodeURIComponent(svg.replace(/\s+/g,' '));
+
+/* ---- illustrated portrait -------------------------------------- */
+function portrait(i, opt = {}) {
+  const s = PAL.skin[i % 5], h = PAL.hair[(i * 3) % 5], t = PAL.top[(i * 2) % 5];
+  const dark = !!opt.dark;
+  const bg = dark ? ['#3B4353', '#1C202A'] : PAL.bg[i % 5];
+  const v = i % 5, sh = '#00000022';
+  let hair = '';
+  if (v === 0) hair = `<circle cx="150" cy="72" r="21" fill="${h}"/>`;                       // bun
+  else if (v === 1) hair = `<path d="M92 148 q-10 92 8 116 h26 q-20 -62 -10 -116z" fill="${h}"/>
+                            <path d="M208 148 q10 92 -8 116 h-26 q20 -62 10 -116z" fill="${h}"/>`; // long
+  else if (v === 2) hair = `<circle cx="112" cy="98" r="19" fill="${h}"/><circle cx="150" cy="84" r="21" fill="${h}"/>
+                            <circle cx="188" cy="98" r="19" fill="${h}"/>`;                  // curls
+  else if (v === 3) hair = `<path d="M90 130 q60 -52 120 0 q-60 -22 -120 0z" fill="${h}"/>`; // swept
+  else hair = `<path d="M88 136 q62 -50 124 0 l4 8 h-132z" fill="#1D2430"/>`;                // cap
+  return uri(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 380">
+    <defs><linearGradient id="g${i}" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="${bg[0]}"/><stop offset="1" stop-color="${bg[1]}"/></linearGradient></defs>
+    <rect width="300" height="380" fill="url(#g${i})"/>
+    <circle cx="150" cy="168" r="112" fill="#ffffff" opacity="${dark ? .05 : .35}"/>
+    <path d="M46 380 C46 296 96 254 150 254 C204 254 254 296 254 380 Z" fill="${t}"/>
+    <path d="M150 254 l-16 46 16 18 16-18z" fill="#ffffff" opacity=".10"/>
+    <rect x="132" y="196" width="36" height="52" rx="16" fill="${s}"/>
+    <rect x="132" y="196" width="36" height="52" rx="16" fill="${sh}"/>
+    <ellipse cx="150" cy="146" rx="60" ry="64" fill="${h}"/>
+    <ellipse cx="150" cy="158" rx="53" ry="60" fill="${s}"/>
+    <ellipse cx="97" cy="162" rx="8" ry="12" fill="${s}"/><ellipse cx="203" cy="162" rx="8" ry="12" fill="${s}"/>
+    ${hair}
+    <circle cx="131" cy="158" r="4.6" fill="#15151C"/><circle cx="169" cy="158" r="4.6" fill="#15151C"/>
+    <path d="M136 182 q14 13 28 0" stroke="#15151C" stroke-width="3.4" fill="none" stroke-linecap="round"/>
+    <path d="M120 132 q12 -8 24 -2 M156 130 q12 -6 24 2" stroke="${h}" stroke-width="4" fill="none" stroke-linecap="round"/>
+  </svg>`);
+}
+
+/* ---- illustrated "photo" of the team at work ------------------- */
+function scene(i) {
+  const bg = PAL.bg[i % 5];
+  const person = (x, y, sc, c, sk) => `<g transform="translate(${x} ${y}) scale(${sc})">
+      <path d="M-26 60 C-26 22 -12 6 0 6 C12 6 26 22 26 60 Z" fill="${c}"/>
+      <circle cx="0" cy="-14" r="18" fill="${sk}"/>
+      <path d="M-18 -20 q18 -20 36 0 q-18 -10 -36 0z" fill="#241C15"/></g>`;
+  const kinds = [
+    /* whiteboard session */ `<rect x="150" y="40" width="300" height="150" rx="8" fill="#fff" opacity=".92"/>
+      <path d="M180 80 h120 M180 106 h190 M180 132 h90" stroke="#B9B4A8" stroke-width="6" stroke-linecap="round"/>
+      <path d="M330 150 l40 -34 26 30" stroke="#6D4AFF" stroke-width="5" fill="none" stroke-linecap="round"/>
+      ${person(120, 200, 1.5, '#22242B', PAL.skin[i % 5])}${person(470, 206, 1.4, '#2C3040', PAL.skin[(i + 2) % 5])}`,
+    /* sticky notes table */ `<rect x="60" y="196" width="480" height="120" rx="14" fill="#D8BE9B"/>
+      <rect x="110" y="212" width="66" height="60" rx="6" fill="#FDE68A" transform="rotate(-6 143 242)"/>
+      <rect x="196" y="206" width="66" height="60" rx="6" fill="#C8F45C" transform="rotate(4 229 236)"/>
+      <rect x="286" y="214" width="66" height="60" rx="6" fill="#DDD4FB" transform="rotate(-3 319 244)"/>
+      <rect x="376" y="208" width="90" height="62" rx="8" fill="#22242B"/><rect x="384" y="216" width="74" height="46" rx="4" fill="#4E5566"/>
+      ${person(140, 150, 1.5, '#22242B', PAL.skin[(i + 1) % 5])}${person(300, 140, 1.6, '#26302A', PAL.skin[(i + 3) % 5])}${person(455, 152, 1.5, '#2C3040', PAL.skin[(i + 4) % 5])}`,
+    /* outdoors */ `<circle cx="470" cy="80" r="42" fill="#FDE68A" opacity=".85"/>
+      <path d="M0 250 L150 120 L260 250 Z" fill="#9FB98A"/><path d="M200 250 L360 100 L520 250 Z" fill="#7E9B6C"/>
+      <path d="M0 250 h600 v90 H0z" fill="#C8DFA8"/>
+      ${person(180, 250, 1.6, '#22242B', PAL.skin[i % 5])}${person(300, 256, 1.5, '#3A2F45', PAL.skin[(i + 2) % 5])}${person(410, 250, 1.6, '#2C3040', PAL.skin[(i + 1) % 5])}`
+  ];
+  return uri(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 340">
+    <defs><linearGradient id="s${i}" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="${bg[0]}"/><stop offset="1" stop-color="${bg[1]}"/></linearGradient></defs>
+    <rect width="600" height="340" fill="url(#s${i})"/>${kinds[i % 3]}</svg>`);
+}
+
+/* ---- hero scene ------------------------------------------------ */
+const HERO_SVG = `<svg viewBox="0 0 900 640" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A student building a project at a desk">
+  <defs>
+    <linearGradient id="room" x1="0" y1="0" x2="0.4" y2="1">
+      <stop offset="0" stop-color="#FBF3E7"/><stop offset="1" stop-color="#E7DAC7"/></linearGradient>
+    <linearGradient id="win" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFFFFF" stop-opacity=".95"/><stop offset="1" stop-color="#FFF6E4" stop-opacity=".5"/></linearGradient>
+    <linearGradient id="screen" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#2B3550"/><stop offset="1" stop-color="#161B29"/></linearGradient>
+  </defs>
+  <rect width="900" height="640" fill="url(#room)"/>
+  <g opacity=".95">
+    <rect x="60" y="30" width="230" height="330" rx="6" fill="url(#win)"/>
+    <rect x="320" y="30" width="230" height="330" rx="6" fill="url(#win)"/>
+    <rect x="580" y="30" width="260" height="330" rx="6" fill="url(#win)"/>
+    <path d="M175 30v330M435 30v330M710 30v330" stroke="#E3D6C2" stroke-width="6"/>
+  </g>
+  <g opacity=".18" fill="#2B2A28">
+    <circle cx="250" cy="300" r="34"/><path d="M186 420c0-46 28-76 64-76s64 30 64 76z"/>
+    <circle cx="640" cy="292" r="32"/><path d="M580 410c0-44 27-72 60-72s60 28 60 72z"/>
+    <circle cx="800" cy="306" r="30"/><path d="M744 418c0-42 25-68 56-68s56 26 56 68z"/>
+  </g>
+  <rect x="40" y="392" width="500" height="14" rx="7" fill="#C6A87F" opacity=".55"/>
+  <rect x="0" y="470" width="900" height="170" fill="#D8BE9B"/>
+  <rect x="0" y="462" width="900" height="14" fill="#C9AA83"/>
+  <g>
+    <path d="M300 470 C300 372 356 322 424 322 C492 322 548 372 548 470 Z" fill="#1B1D24"/>
+    <path d="M424 322 l-20 54 20 22 20-22z" fill="#ffffff" opacity=".08"/>
+    <rect x="404" y="246" width="42" height="60" rx="18" fill="#D9A97F"/>
+    <ellipse cx="424" cy="196" rx="62" ry="66" fill="#2B2018"/>
+    <ellipse cx="424" cy="208" rx="55" ry="62" fill="#F0C6A0"/>
+    <circle cx="424" cy="118" r="24" fill="#2B2018"/>
+    <path d="M366 176 q58 -56 116 0 q-58 -30 -116 0z" fill="#2B2018"/>
+    <circle cx="404" cy="210" r="4.8" fill="#15151C"/><circle cx="444" cy="210" r="4.8" fill="#15151C"/>
+    <path d="M408 234 q16 14 32 0" stroke="#15151C" stroke-width="3.6" fill="none" stroke-linecap="round"/>
+    <path d="M300 470 q-26 -78 34 -104 l16 30 z" fill="#22242B"/>
+    <path d="M336 400 q60 26 96 46" stroke="#D9A97F" stroke-width="26" stroke-linecap="round" fill="none"/>
+    <path d="M420 440 l52 -30" stroke="#3D6BE0" stroke-width="9" stroke-linecap="round"/>
+  </g>
+  <g>
+    <path d="M120 470 h250 l-30 -110 h-190z" fill="#3A414F"/>
+    <path d="M150 366 h180 l24 92 h-228z" fill="url(#screen)"/>
+    <path d="M166 384 h60 M166 400 h96 M166 416 h72 M166 432 h110" stroke="#7C8CB5" stroke-width="6" stroke-linecap="round" opacity=".8"/>
+    <path d="M240 384 h44" stroke="#C8F45C" stroke-width="6" stroke-linecap="round"/>
+    <rect x="104" y="466" width="282" height="12" rx="6" fill="#525C6E"/>
+  </g>
+  <g>
+    <rect x="560" y="426" width="150" height="30" rx="8" fill="#454B57"/>
+    <circle cx="590" cy="466" r="22" fill="#22242B"/><circle cx="590" cy="466" r="9" fill="#6E7686"/>
+    <circle cx="682" cy="466" r="22" fill="#22242B"/><circle cx="682" cy="466" r="9" fill="#6E7686"/>
+    <path d="M596 426 v-42 h74 v42" stroke="#8A93A3" stroke-width="8" fill="none" stroke-linecap="round"/>
+    <circle cx="596" cy="378" r="10" fill="#C8F45C"/><circle cx="670" cy="378" r="10" fill="#6D4AFF"/>
+    <rect x="618" y="392" width="34" height="24" rx="5" fill="#E2574C"/>
+  </g>
+  <g fill="#FFFFFF" opacity=".9">
+    <rect x="740" y="440" width="130" height="30" rx="4" transform="rotate(-5 805 455)"/>
+    <rect x="726" y="424" width="130" height="30" rx="4" transform="rotate(4 791 439)"/>
+  </g>
+  <path d="M770 430 h60 M764 446 h84" stroke="#C7C1B4" stroke-width="5" stroke-linecap="round"/>
+</svg>`;
+
+/* ---- dusk banner behind the closing CTA ------------------------ */
+const BANNER_SVG = `<svg class="bg" viewBox="0 0 1440 460" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+  <defs><linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#BFD3F2"/><stop offset=".55" stop-color="#E7CDE4"/><stop offset="1" stop-color="#F7D9AE"/></linearGradient>
+    <radialGradient id="sun" cx=".78" cy=".62" r=".4">
+      <stop offset="0" stop-color="#FFF3D0" stop-opacity=".95"/><stop offset="1" stop-color="#FFF3D0" stop-opacity="0"/></radialGradient></defs>
+  <rect width="1440" height="460" fill="url(#sky)"/>
+  <rect width="1440" height="460" fill="url(#sun)"/>
+  <g fill="#FFFFFF" opacity=".55">
+    <ellipse cx="240" cy="96" rx="96" ry="26"/><ellipse cx="330" cy="86" rx="60" ry="20"/>
+    <ellipse cx="1080" cy="70" rx="110" ry="24"/><ellipse cx="980" cy="80" rx="66" ry="18"/></g>
+  <path d="M0 330 L240 190 L430 330Z" fill="#9FB3D0" opacity=".75"/>
+  <path d="M300 330 L560 170 L820 330Z" fill="#8296B8" opacity=".8"/>
+  <path d="M760 330 L1040 200 L1440 330Z" fill="#93A6C4" opacity=".7"/>
+  <path d="M0 352 C260 322 520 340 760 330 C1000 320 1240 342 1440 328 V460 H0Z" fill="#4B566E"/>
+  <path d="M0 392 C300 372 620 394 900 384 C1120 376 1300 390 1440 380 V460 H0Z" fill="#3B4457"/>
+  <g fill="#1B1F29">
+    <g transform="translate(886 338)"><circle cx="0" cy="-56" r="19"/><path d="M-28 0 c0-36 13-56 28-56 s28 20 28 56z"/></g>
+    <g transform="translate(946 342)"><circle cx="0" cy="-60" r="20"/><path d="M-30 0 c0-38 14-60 30-60 s30 22 30 60z"/></g>
+    <g transform="translate(1008 336)"><circle cx="0" cy="-58" r="19"/><path d="M-29 0 c0-37 13-58 29-58 s29 21 29 58z"/></g>
+    <g transform="translate(1070 344)"><circle cx="0" cy="-62" r="21"/><path d="M-31 0 c0-39 14-62 31-62 s31 23 31 62z"/></g>
+    <g transform="translate(1132 338)"><circle cx="0" cy="-56" r="19"/><path d="M-28 0 c0-36 13-56 28-56 s28 20 28 56z"/></g>
+    <path d="M860 300 q30 -18 58 -6 M920 302 q32 -18 60 -6 M984 298 q30 -18 58 -6 M1046 304 q32 -18 60 -6"
+       stroke="#1B1F29" stroke-width="13" fill="none" stroke-linecap="round"/>
+  </g>
+</svg>`;
+
+/* ---- "together" line art for the about-page footer ------------- */
+const TOGETHER_SVG = `<svg class="art" viewBox="0 0 380 150" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+  <ellipse cx="196" cy="96" rx="150" ry="46" fill="#C8F45C" opacity=".8"/>
+  <g fill="#16161A">
+    <g transform="translate(96 150)"><circle cx="0" cy="-74" r="15"/><path d="M-24 0 c0-32 10-52 24-52 s24 20 24 52z"/></g>
+    <g transform="translate(146 150)"><circle cx="0" cy="-84" r="17"/><path d="M-27 0 c0-36 12-58 27-58 s27 22 27 58z"/></g>
+    <g transform="translate(200 150)"><circle cx="0" cy="-90" r="18"/><path d="M-29 0 c0-38 13-62 29-62 s29 24 29 62z"/></g>
+    <g transform="translate(254 150)"><circle cx="0" cy="-84" r="17"/><path d="M-27 0 c0-36 12-58 27-58 s27 22 27 58z"/></g>
+    <g transform="translate(302 150)"><circle cx="0" cy="-74" r="15"/><path d="M-24 0 c0-32 10-52 24-52 s24 20 24 52z"/></g>
+    <path d="M34 44 c7-12 20-9 22 2 2-11 15-14 22-2 5 10-10 22-22 29-12-7-27-19-22-29z"/>
+    <path d="M338 40 c6-10 17-7 19 2 1-9 13-12 18-2 4 9-8 19-18 24-10-5-23-15-19-24z" opacity=".75"/>
+    <path d="M118 96 q28 -16 52 -4 M176 92 q28 -16 54 -4 M236 96 q28 -16 52 -4" stroke="#16161A"
+       stroke-width="9" fill="none" stroke-linecap="round"/>
+  </g>
+</svg>`;
+</script>
+<script>
+/* ═══════════════════════════════════════════════════════════════
+   3. RENDER + INTERACTIONS
+   ═══════════════════════════════════════════════════════════════ */
+const $  = (s, r = document) => r.querySelector(s);
+const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+const ico = n => `<i data-lucide="${n}"></i>`;
+const el  = (id, html) => { const n = document.getElementById(id); if (n) n.innerHTML = html; };
+
+/* brand ---------------------------------------------------------- */
+$$('[data-bind="brand"]').forEach(n => n.textContent = SITE.brand);
+$('#brandMark').src = LOGO_DARK;
+$('#brandMarkLight').src = LOGO_LIGHT;
+$('#footBrand').href = SITE.links.linkedin;
+$('#year').textContent = new Date().getFullYear();
+
+/* hero + banner art ---------------------------------------------- */
+el('heroArt', HERO_SVG);
+$('#bannerSect').insertAdjacentHTML('afterbegin', BANNER_SVG);
+el('togetherArt', TOGETHER_SVG);
+
+/* the two learning flows ----------------------------------------- */
+const flow = list => list.map((s, i) =>
+  `${i ? `<span class="flow__arrow">${ico('arrow-right')}</span>` : ''}
+   <div class="flow__step">${ico(s.icon)}<span>${s.label}</span></div>`).join('');
+el('flowOld', flow(SITE.flowOld));
+el('flowNew', flow(SITE.flowNew));
+
+/* belief cards ---------------------------------------------------- */
+el('feelCards', SITE.feelCards.map(c =>
+  `<article class="card ${c.tone}">${ico(c.icon)}<h3>${c.title}</h3><p>${c.body}</p></article>`).join(''));
+
+/* journey --------------------------------------------------------- */
+el('journey', SITE.journey.map(s =>
+  `<div class="jstep"><span class="jstep__dot">${ico(s.icon)}</span><h4>${s.title}</h4><p>${s.body}</p></div>`).join(''));
+
+/* how we make learning exciting ----------------------------------- */
+el('excitingCards', SITE.exciting.map(c =>
+  `<article class="wcard ${c.tone}">${ico(c.icon)}<div><h3>${c.title}</h3><p>${c.html}</p></div></article>`).join(''));
+
+/* video diaries ---------------------------------------------------- */
+el('videos', SITE.videos.map((v, i) => {
+  const q = v.hl ? v.q.replace(v.hl, `<em>${v.hl}</em>`) : v.q;
+  const href = v.url || SITE.links.youtube;
+  return `<a class="vcard" href="${href}" target="_blank" rel="noopener">
+      <img src="${v.photo || portrait(i + 1, { dark: true })}" alt="">
+      <span class="vcard__play">${ico('play')}</span><span class="vcard__q">${q}</span></a>`;
+}).join('') +
+  `<a class="vcard vcard--cta" href="${SITE.links.youtube}" target="_blank" rel="noopener">
+     ${ico('clapperboard')}<span>Watch the conversations →</span>
+     <small>${ico('youtube')} On our YouTube channel</small></a>`);
+
+/* stats ------------------------------------------------------------ */
+el('stats', SITE.stats.map(s =>
+  `<div class="stat">${ico(s.icon)}
+     <div><span class="stat__n" data-count="${s.value}" data-suffix="${s.suffix}">0${s.suffix}</span></div>
+     <div class="stat__l">${s.label}</div></div>`).join(''));
+
+/* stories ----------------------------------------------------------- */
+el('quotes', SITE.quotes.map((q, i) =>
+  `<figure class="qcard"><img src="${q.photo || portrait(i + 3)}" alt="${q.name}">
+     <figcaption><p>"${q.text}"</p><cite>— <b>${q.name}</b>${q.role}</cite></figcaption></figure>`).join('') +
+  `<a class="btn btn--ghost" href="${SITE.storiesUrl}">Read more stories ${ico('arrow-right')}</a>`);
+
+/* community roles ---------------------------------------------------- */
+el('roles', SITE.roles.map(r =>
+  `<a class="role ${r.tone}" href="${r.url}">${ico(r.icon)}
+     <h4>${r.title}</h4><p>${r.body}</p>
+     <span class="iconbtn">${ico('arrow-right')}</span></a>`).join(''));
+
+/* footer socials ------------------------------------------------------ */
+el('social', [['mail', SITE.links.email], ['youtube', SITE.links.youtube],
+              ['linkedin', SITE.links.linkedin], ['instagram', SITE.links.instagram]]
+  .map(([n, u]) => `<a href="${u}" target="_blank" rel="noopener" aria-label="${n}">${ico(n)}</a>`).join(''));
+
+/* ── who we are ─────────────────────────────────────────────────────── */
+const COLLAGE = [
+  'left:16%;top:0;width:30%;aspect-ratio:1.3;transform:rotate(-5deg);z-index:2',
+  'right:0;top:6%;width:42%;aspect-ratio:1.4;transform:rotate(3deg);z-index:1',
+  'left:0;top:34%;width:36%;aspect-ratio:1.35;transform:rotate(4deg);z-index:3',
+  'right:6%;top:44%;width:40%;aspect-ratio:1.45;transform:rotate(-3deg);z-index:2',
+  'left:28%;top:62%;width:34%;aspect-ratio:1.3;transform:rotate(2deg);z-index:4'
+];
+el('collage', COLLAGE.map((st, i) =>
+  `<figure style="${st}"><img src="${scene(i)}" alt=""></figure>`).join('') +
+  `<span class="note" style="right:0;bottom:2%">learning<br>happens<br>everywhere!</span>`);
+
+el('teamRail', SITE.team.map((m, i) =>
+  `<article class="member"><img src="${m.photo || portrait(i)}" alt="${m.name}">
+     <div class="member__b"><span class="member__n">${m.name}</span>
+       <p class="member__r">${m.line}</p>
+       <a class="iconbtn" href="${m.url}" aria-label="More about ${m.name}">${ico('arrow-right')}</a></div></article>`).join(''));
+
+el('doing', SITE.doing.map(d => `<div class="doing__i">${ico(d.icon)}<span>${d.label}</span></div>`).join(''));
+el('timeline', SITE.timeline.map(t =>
+  `<div class="tl__s"><span class="tl__d">${ico(t.icon)}</span><span>${t.label}</span></div>`).join(''));
+el('sayings', SITE.sayings.map(s => `<span class="chip">${s}</span>`).join(''));
+
+/* icons ---------------------------------------------------------------- */
+const drawIcons = () => { if (window.lucide) lucide.createIcons(); };
+drawIcons(); addEventListener('load', drawIcons);
+
+/* hand-drawn marker strokes: measure each path so it draws cleanly ------ */
+const calm = !!(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches);
+if (!calm) $$('.mark--stroke path').forEach(p => {
+  const len = Math.ceil(p.getTotalLength ? p.getTotalLength() : 800) + 4;
+  p.style.strokeDasharray = len; p.style.strokeDashoffset = len;
+  p.parentElement.parentElement.style.setProperty('--len', len);
+});
+
+/* reveal on scroll ------------------------------------------------------ */
+if (!('IntersectionObserver' in window)) {
+  $$('.rv, .mark').forEach(n => n.classList.add('is-in'));
+  $$('[data-count]').forEach(n => n.textContent = (+n.dataset.count).toLocaleString('en-IN') + (n.dataset.suffix || ''));
+}
+const io = new IntersectionObserver(es => es.forEach(e => {
+  if (!e.isIntersecting) return;
+  e.target.classList.add('is-in');
+  $$('.mark', e.target).forEach(m => m.classList.add('is-in'));
+  if (e.target.classList.contains('mark')) e.target.classList.add('is-in');
+  $$('[data-count]', e.target).forEach(count);
+  io.unobserve(e.target);
+}), { threshold: .18, rootMargin: '0px 0px -40px 0px' });
+$$('.rv, .mark').forEach(n => io.observe(n));
+
+/* animated counters ----------------------------------------------------- */
+function count(n) {
+  const to = +n.dataset.count, sfx = n.dataset.suffix || '', t0 = performance.now(), dur = 1400;
+  const tick = t => {
+    const p = Math.min(1, (t - t0) / dur), e = 1 - Math.pow(1 - p, 3);
+    n.textContent = Math.round(to * e).toLocaleString('en-IN') + sfx;
+    if (p < 1) requestAnimationFrame(tick);
+  };
+  requestAnimationFrame(tick);
+}
+
+/* sticky nav shadow ------------------------------------------------------ */
+const nav = $('#nav');
+addEventListener('scroll', () => nav.classList.toggle('is-stuck', scrollY > 8), { passive: true });
+
+/* team carousel ---------------------------------------------------------- */
+const rail = $('#teamRail');
+const nudge = d => rail.scrollBy({ left: d * (rail.firstElementChild?.offsetWidth + 16 || 220) * 2, behavior: 'smooth' });
+$('#teamPrev').onclick = () => nudge(-1);
+$('#teamNext').onclick = () => nudge(1);
+
+/* two views: home ⇄ who we are ------------------------------------------- */
+function show(view, hash) {
+  $$('[data-view]').forEach(v => v.classList.toggle('is-active', v.dataset.view === view));
+  $('#navHome').hidden = view !== 'home';
+  $('#navAbout').hidden = view === 'home';
+  document.title = view === 'about'
+    ? `Who we are — ${SITE.brand}`
+    : `${SITE.brand} — What if education actually prepared you for life?`;
+  if (hash) { const t = document.getElementById(hash); if (t) { t.scrollIntoView({ behavior: 'smooth' }); return; } }
+  scrollTo({ top: 0, behavior: 'smooth' });
+}
+$$('[data-goto]').forEach(a => a.addEventListener('click', e => {
+  e.preventDefault(); show(a.dataset.goto, a.dataset.hash);
+}));
+</script>
+</body>
+</html>
